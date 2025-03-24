@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { OnboardingState, OnboardingStep, CompanyProfile } from '@/types/onboarding';
 
 const INITIAL_STATE: OnboardingState = {
-  step: 'welcome',
+  step: 'name',
   profile: {},
 };
 
@@ -11,24 +11,24 @@ export function useOnboarding(ceoName: string) {
 
   const getNextQuestion = useCallback((step: OnboardingStep, profile: Partial<CompanyProfile>) => {
     switch (step) {
-      case 'welcome':
-        return `Hello! I'm ${ceoName}, your AI CEO. I'm here to help guide your business decisions. What's your name?`;
       case 'name':
-        return `Nice to meet you, ${profile.name}! What's the name of your company?`;
+        return `Nice to meet you, ${profile.name || ''}! What's the name of your company?`;
       case 'company_name':
-        return `Great! ${profile.companyName} sounds interesting. How many employees do you currently have?`;
+        return `Great! ${profile.companyName || ''} sounds interesting. How many employees do you currently have?`;
       case 'company_size':
         return `Thanks! What's your current funding stage? (e.g., Pre-seed, Seed, Series A, etc.)`;
       case 'funding_stage':
         return `Got it! What's the current state of your product? (e.g., Idea, MVP, Beta, Live)`;
       case 'product_state':
-        return `Last question: What industry is ${profile.companyName} in?`;
+        return `Last question: What industry is ${profile.companyName || ''} in?`;
       case 'industry':
-        return `Perfect! I now have a good understanding of ${profile.companyName}. Let's get started with your business strategy. What would you like to focus on first?`;
+        return `Perfect! I now have a good understanding of ${profile.companyName || ''}. Let's get started with your business strategy. What would you like to focus on first?`;
+      case 'complete':
+        return null;
       default:
-        return '';
+        return null;
     }
-  }, [ceoName]);
+  }, []);
 
   const handleUserResponse = useCallback((response: string) => {
     setState(prev => {
@@ -55,7 +55,7 @@ export function useOnboarding(ceoName: string) {
           break;
       }
 
-      const steps: OnboardingStep[] = ['welcome', 'name', 'company_name', 'company_size', 'funding_stage', 'product_state', 'industry', 'complete'];
+      const steps: OnboardingStep[] = ['name', 'company_name', 'company_size', 'funding_stage', 'product_state', 'industry', 'complete'];
       const currentIndex = steps.indexOf(prev.step);
       const nextStep = steps[currentIndex + 1] || 'complete';
 

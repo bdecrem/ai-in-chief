@@ -13,14 +13,19 @@ function ChatContent() {
   const [input, setInput] = useState('');
   const { state, handleUserResponse, getCurrentQuestion, isComplete } = useOnboarding(ceo?.name || '');
 
+  // Only set initial message once when component mounts
   useEffect(() => {
-    // Add initial message
-    if (messages.length === 0) {
-      setMessages([{ role: 'assistant', content: getCurrentQuestion() }]);
+    if (messages.length === 0 && ceo) {
+      setMessages([
+        { 
+          role: 'assistant', 
+          content: `Hello! I'm ${ceo.name}, your AI CEO. I'm here to help guide your business decisions. What's your name?`
+        }
+      ]);
     }
-  }, [getCurrentQuestion, messages.length]);
+  }, [ceo, messages.length]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -31,11 +36,14 @@ function ChatContent() {
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     
     // Handle the response and get next question
-    handleUserResponse(userMessage);
+    await handleUserResponse(userMessage);
     
     // Add AI response after a short delay
     setTimeout(() => {
-      setMessages(prev => [...prev, { role: 'assistant', content: getCurrentQuestion() }]);
+      const nextQuestion = getCurrentQuestion();
+      if (nextQuestion) {
+        setMessages(prev => [...prev, { role: 'assistant', content: nextQuestion }]);
+      }
     }, 500);
   };
 
