@@ -4,14 +4,15 @@ import Image from 'next/image';
 
 export default function SelectCEO() {
   return (
-    <div className="min-h-screen bg-gray-900 p-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen bg-gray-900 p-4 flex flex-col">
+      <div className="max-w-2xl mx-auto w-full flex-1 flex flex-col">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-white mb-2">Choose Your AI CEO</h1>
-          <p className="text-gray-400">Select the personality that best matches your business needs</p>
+          <h1 className="text-3xl font-bold text-white mb-4">Welcome to AI In Chief!</h1>
+          <p className="text-xl text-gray-300 mb-2">Let's get started!</p>
+          <p className="text-gray-400">Select the AI CEO that best matches your business needs</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 flex-1">
           {CEO_CHARACTERS.map((ceo) => (
             <Link
               key={ceo.id}
