@@ -16,14 +16,12 @@ function ChatContent() {
   // Only set initial message once when component mounts
   useEffect(() => {
     if (messages.length === 0 && ceo) {
-      setMessages([
-        { 
-          role: 'assistant', 
-          content: `Hello! I'm ${ceo.name}, your AI CEO. I'm here to help guide your business decisions. What's your name?`
-        }
-      ]);
+      const initialQuestion = getCurrentQuestion();
+      if (initialQuestion) {
+        setMessages([{ role: 'assistant', content: initialQuestion }]);
+      }
     }
-  }, [ceo, messages.length]);
+  }, [ceo, messages.length, getCurrentQuestion]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
