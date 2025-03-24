@@ -1,20 +1,21 @@
 export type OnboardingStep = 
-  | 'welcome'
+  | 'company_type'  // real or test company
   | 'name'
   | 'company_name'
+  | 'company_description'
   | 'company_size'
   | 'funding_stage'
   | 'product_state'
-  | 'industry'
   | 'complete';
 
 export interface CompanyProfile {
+  companyType: 'real' | 'test';
   name: string;
   companyName: string;
+  companyDescription: string;
   companySize: string;
   fundingStage: string;
   productState: string;
-  industry: string;
 }
 
 export interface OnboardingState {
