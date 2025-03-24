@@ -2,9 +2,9 @@
 
 import { useSearchParams } from 'next/navigation';
 import { CEO_CHARACTERS } from '@/types/ceo';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 
-export default function Chat() {
+function ChatContent() {
   const searchParams = useSearchParams();
   const ceoId = searchParams.get('ceo');
   const ceo = CEO_CHARACTERS.find(c => c.id === ceoId);
@@ -67,5 +67,17 @@ export default function Chat() {
         </div>
       </form>
     </div>
+  );
+}
+
+export default function Chat() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-screen bg-gray-900">
+        <div className="text-white">Loading chat...</div>
+      </div>
+    }>
+      <ChatContent />
+    </Suspense>
   );
 } 
