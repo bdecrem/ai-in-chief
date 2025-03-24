@@ -2,30 +2,41 @@
 
 import { useSearchParams } from 'next/navigation';
 import { CEO_CHARACTERS } from '@/types/ceo';
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useOnboarding } from '@/hooks/useOnboarding';
 
 function ChatContent() {
   const searchParams = useSearchParams();
   const ceoId = searchParams.get('ceo');
   const ceo = CEO_CHARACTERS.find(c => c.id === ceoId);
-  const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      content: `Hello! I'm ${ceo?.name}, your AI CEO. I'm here to help guide your business decisions. What's your name?`
-    }
-  ]);
+  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);
   const [input, setInput] = useState('');
+  const { state, handleUserResponse, getCurrentQuestion, isComplete } = useOnboarding(ceo?.name || '');
+
+  useEffect(() => {
+    // Add initial message
+    if (messages.length === 0) {
+      setMessages([{ role: 'assistant', content: getCurrentQuestion() }]);
+    }
+  }, [getCurrentQuestion, messages.length]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    setMessages(prev => [
-      ...prev,
-      { role: 'user', content: input },
-      { role: 'assistant', content: 'I understand. Could you tell me more about your company?' }
-    ]);
+    const userMessage = input.trim();
     setInput('');
+    
+    // Add user message
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    
+    // Handle the response and get next question
+    handleUserResponse(userMessage);
+    
+    // Add AI response after a short delay
+    setTimeout(() => {
+      setMessages(prev => [...prev, { role: 'assistant', content: getCurrentQuestion() }]);
+    }, 500);
   };
 
   return (
