@@ -5,13 +5,13 @@ import { CEO_CHARACTERS } from '@/types/ceo';
 
 export default function Option3() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-16">
+    <div className="min-h-screen bg-gray-900">
       {/* Hero */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-center mb-24"
+        className="text-center pt-16 pb-24"
       >
         <h1 className="text-5xl md:text-7xl font-medium tracking-tight mb-8 text-white">
           AI In Chief
@@ -25,14 +25,14 @@ export default function Option3() {
       </motion.div>
 
       {/* CEO Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-6 md:px-12 lg:px-16">
         {CEO_CHARACTERS.map((ceo, index) => (
           <motion.div
             key={ceo.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="group"
+            className="group bg-gray-900"
           >
             <div className="relative aspect-[4/5] mb-6 overflow-hidden rounded-lg">
               <Image
