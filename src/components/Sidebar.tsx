@@ -9,8 +9,6 @@ import {
   AdjustmentsHorizontalIcon,
   BuildingOfficeIcon,
   ChartBarIcon,
-  Bars3Icon,
-  XMarkIcon
 } from '@heroicons/react/24/outline';
 import { useState, useEffect } from 'react';
 
@@ -25,15 +23,14 @@ const navigation = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setIsOpen(true);
-      }
+      const isMobileView = window.innerWidth < 768;
+      setIsMobile(isMobileView);
+      setIsOpen(!isMobileView); // Open by default on desktop, closed on mobile
     };
 
     checkMobile();
@@ -46,26 +43,28 @@ export default function Sidebar() {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-800 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className={`fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors duration-200 ${
+          isOpen ? 'md:left-60' : 'left-4'
+        }`}
       >
-        {isOpen ? (
-          <XMarkIcon className="h-6 w-6" />
-        ) : (
-          <Bars3Icon className="h-6 w-6" />
-        )}
+        <div className="w-6 h-6 flex flex-col justify-center space-y-1.5">
+          <div className={`h-0.5 bg-white transition-all duration-300 ${
+            isOpen ? 'w-4' : 'w-6'
+          }`} />
+          <div className={`h-0.5 bg-white transition-all duration-300 ${
+            isOpen ? 'w-6' : 'w-4'
+          }`} />
+        </div>
       </button>
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-200 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:relative md:translate-x-0`}
+        }`}
       >
         <div className="flex h-full flex-col border-r border-gray-800 bg-gray-900">
-          <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-            <div className="flex flex-shrink-0 items-center px-4">
-              <h1 className="text-xl font-bold text-white">AI In Chief</h1>
-            </div>
+          <div className="flex flex-1 flex-col overflow-y-auto pt-16 pb-4">
             <nav className="mt-5 flex-1 space-y-1 px-2">
               {navigation.map((item) => {
                 const isActive = pathname === item.href;
@@ -98,7 +97,7 @@ export default function Sidebar() {
       {/* Overlay for mobile */}
       {isOpen && isMobile && (
         <div
-          className="fixed inset-0 z-30 bg-black bg-opacity-50"
+          className="fixed inset-0 z-30 bg-black bg-opacity-50 transition-opacity duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
