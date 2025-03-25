@@ -40,12 +40,10 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Toggle Button */}
+      {/* Toggle Button - Fixed position */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed top-4 z-50 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-all duration-300 ${
-          isOpen ? 'left-[248px] md:left-[248px]' : 'left-4'
-        }`}
+        className="fixed top-8 left-4 z-50 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-all duration-300"
       >
         <div className="w-6 h-6 flex flex-col justify-center space-y-1.5">
           <div className={`h-0.5 bg-white transition-all duration-300 ${
@@ -59,12 +57,12 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 w-64 transform transition-all duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-16 z-40 w-64 transform transition-all duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex h-full flex-col border-r border-gray-800 bg-gray-900">
-          <div className="flex flex-1 flex-col overflow-y-auto pt-16 pb-4">
+          <div className="flex flex-1 flex-col overflow-y-auto pt-8 pb-4">
             <nav className="mt-5 flex-1 space-y-1 px-2">
               {navigation.map((item) => {
                 const isActive = pathname === item.href;

@@ -46,8 +46,8 @@ function ChatContent() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] bg-gray-900 -mx-6 rounded-t-xl overflow-hidden">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+    <div className="flex flex-col h-full">
+      <div className="flex-1 overflow-y-auto p-6 space-y-4">
         {messages.map((message, index) => (
           <div
             key={index}
@@ -57,7 +57,7 @@ function ChatContent() {
               className={`max-w-[80%] rounded-lg p-4 ${
                 message.role === 'user'
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-800 text-gray-100'
+                  : 'bg-gray-700 text-gray-100'
               }`}
             >
               {message.content}
@@ -66,14 +66,14 @@ function ChatContent() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-t border-gray-800 bg-gray-900">
+      <form onSubmit={handleSubmit} className="p-6 border-t border-gray-700">
         <div className="flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="submit"
