@@ -43,8 +43,8 @@ export default function Option3() {
               <span className="italic">leadership</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-              Experience the future of business leadership with an AI CEO that brings
-              strategic vision and unwavering dedication to your company.
+              Let your AI CEO run the business so you can tend to more important matters
+              (that new Netflix show).
             </p>
             <Link
               href="/select-ceo"

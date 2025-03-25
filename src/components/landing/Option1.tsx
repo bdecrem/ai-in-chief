@@ -23,8 +23,8 @@ export default function Option1() {
               AI In Chief
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Transform your business with an AI CEO partner that thinks strategically, 
-              adapts instantly, and guides your success 24/7.
+              Let your AI CEO run the business so you can tend to more important matters 
+              (that new Netflix show).
             </p>
             <Link
               href="/select-ceo"

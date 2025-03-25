@@ -32,8 +32,8 @@ export default function Option2() {
               AI In Chief
             </h1>
             <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-              Experience the future of leadership with an AI CEO that brings strategic vision,
-              instant adaptability, and 24/7 dedication to your business.
+              Let your AI CEO run the business so you can tend to more important matters
+              (that new Netflix show).
             </p>
             <Link
               href="/select-ceo"
