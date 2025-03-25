@@ -25,14 +25,14 @@ export default function Option3() {
       </motion.div>
 
       {/* CEO Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-6 md:px-12 lg:px-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
         {CEO_CHARACTERS.map((ceo, index) => (
           <motion.div
             key={ceo.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="group bg-gray-900"
+            className="group bg-gray-900 flex flex-col px-4 md:px-8"
           >
             <div className="relative aspect-[4/5] mb-6 overflow-hidden rounded-lg">
               <Image
@@ -43,21 +43,23 @@ export default function Option3() {
                   transition-all duration-500"
               />
             </div>
-            <h3 className="text-lg font-medium mb-2 text-white">
-              {ceo.name}
-            </h3>
-            <p className="text-sm text-gray-400 mb-4">
-              {ceo.leadershipStyle}
-            </p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {ceo.quirks.map((quirk, i) => (
-                <span
-                  key={i}
-                  className="text-xs px-3 py-1 bg-gray-800 text-gray-300 rounded-full"
-                >
-                  {quirk}
-                </span>
-              ))}
+            <div className="flex-grow">
+              <h3 className="text-lg font-medium mb-2 text-white">
+                {ceo.name}
+              </h3>
+              <p className="text-sm text-gray-400 mb-4">
+                {ceo.leadershipStyle}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {ceo.quirks.map((quirk, i) => (
+                  <span
+                    key={i}
+                    className="text-xs px-3 py-1 bg-gray-800 text-gray-300 rounded-full"
+                  >
+                    {quirk}
+                  </span>
+                ))}
+              </div>
             </div>
             <Link
               href={`/select-ceo?id=${ceo.id}`}
