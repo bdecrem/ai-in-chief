@@ -21,8 +21,8 @@ export default function LayoutWrapper({
       {showSidebar && <Sidebar />}
       
       {/* Main content area with padding */}
-      <div className="flex-1 flex justify-center px-6">
-        <div className="w-full max-w-3xl flex flex-col min-h-screen py-8">
+      <div className="flex-1 min-w-0 flex justify-center pl-4 pr-6">
+        <div className="w-full max-w-2xl flex flex-col min-h-screen py-8">
           <main className="flex-1">
             <div className="bg-gray-800 rounded-xl h-full overflow-hidden">
               {children}
