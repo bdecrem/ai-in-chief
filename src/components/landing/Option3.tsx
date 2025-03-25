@@ -62,7 +62,7 @@ export default function Option3() {
               </div>
             </div>
             <Link
-              href={`/select-ceo?id=${ceo.id}`}
+              href={`/chat?ceo=${ceo.id}`}
               className="inline-block text-sm font-medium text-blue-400 
                 hover:text-blue-300 transition-colors"
             >
