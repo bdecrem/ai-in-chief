@@ -16,9 +16,14 @@ export default function LayoutWrapper({
   return (
     <div className="flex h-screen bg-gray-900">
       {showSidebar && <Sidebar />}
-      <main className="flex-1 overflow-y-auto">
-        {children}
-      </main>
+      <div className="flex-1 flex flex-col min-h-screen">
+        {/* Top padding area for toggle button */}
+        <div className="h-16" />
+        {/* Main content area with padding */}
+        <main className="flex-1 overflow-y-auto px-6 pb-6">
+          {children}
+        </main>
+      </div>
     </div>
   );
 } 

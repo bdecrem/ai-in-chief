@@ -43,8 +43,8 @@ export default function Sidebar() {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors duration-200 ${
-          isOpen ? 'md:left-60' : 'left-4'
+        className={`fixed top-4 z-50 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-all duration-300 ${
+          isOpen ? 'left-[248px] md:left-[248px]' : 'left-4'
         }`}
       >
         <div className="w-6 h-6 flex flex-col justify-center space-y-1.5">
@@ -59,7 +59,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-40 w-64 transform transition-all duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

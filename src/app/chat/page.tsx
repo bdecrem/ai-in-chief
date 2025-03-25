@@ -46,7 +46,7 @@ function ChatContent() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-900">
+    <div className="flex flex-col h-[calc(100vh-4rem)] bg-gray-900 -mx-6 rounded-t-xl overflow-hidden">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message, index) => (
           <div
@@ -66,7 +66,7 @@ function ChatContent() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-t border-gray-800">
+      <form onSubmit={handleSubmit} className="p-4 border-t border-gray-800 bg-gray-900">
         <div className="flex gap-2">
           <input
             type="text"
