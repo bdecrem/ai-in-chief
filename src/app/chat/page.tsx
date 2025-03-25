@@ -1,10 +1,11 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Chat from '@/components/Chat';
 import Sidebar from '@/components/Sidebar';
 
-export default function ChatPage() {
+function ChatContent() {
   const searchParams = useSearchParams();
   const selectedCeoId = searchParams.get('ceo');
 
@@ -19,5 +20,17 @@ export default function ChatPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-screen bg-gray-900 text-white flex items-center justify-center">
+        <div className="text-xl">Loading chat...</div>
+      </div>
+    }>
+      <ChatContent />
+    </Suspense>
   );
 } 
